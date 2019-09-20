@@ -17,6 +17,7 @@ public class Resume {
         this.skillList = new ArrayList<>();
     }
 
+    //use of getters/setters within class preferred to avoid bugs if their implementation changes
     public Resume(int id, String name, String email, List<Education> educationList, List<Work> workList, List<Skill> skillList) {
         this();
         this.setId(id);

@@ -5,7 +5,6 @@
 package com.danielgkneto.mcjavabc;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ public class Application {
     public static void main(String[] args) {
         Scanner kb = new Scanner(System.in);
         //this variable will be used for every user input
-        //every input, except for both dates, are required not to be an empty string.
+        //every input, except for both dates and skills proficiency, are required not to be an empty string.
         String answer = "";
 
         System.out.println("Welcome to the Robo Resume");
@@ -35,9 +34,9 @@ public class Application {
             educationList.add(new Education("BS.", "Computer Science", "Montgomery College", 2019));
             jobDescriptions.add("Hello World systems developer!");
             workList.add(new Work("IBM", "Java developer", date, date, jobDescriptions));
-            skillList.add(new Skill("Cobol", "Expert"));
-            skillList.add(new Skill("Basic", "Expert"));
-            skillList.add(new Skill("JavaScript", "Basic"));
+            skillList.add(new Skill("Cobol", Proficiency.EXPERT.getText()));
+            skillList.add(new Skill("Basic", Proficiency.EXPERT.getText()));
+            skillList.add(new Skill("JavaScript", Proficiency.NOVICE.getText()));
 
             Resume testResume = new Resume(1, "Daniel G. K. Neto", "daniel@gmail.com", educationList, workList, skillList);
             printResume(testResume);
@@ -213,12 +212,17 @@ public class Application {
             skill.setName(answer);
 
             while (true) {
-                System.out.println("Enter the skill proficiency: ");
+                System.out.println("Enter the skill proficiency: " + Proficiency.printOptions());
                 answer = kb.nextLine();
-                if (answer.length() > 0)
+                //proficiency is validated against one of the enum options
+                try {
+                    Proficiency.valueOf(answer.toUpperCase());
                     break;
+                }
+                catch(IllegalArgumentException e) {
+                }
             }
-            skill.setProficiency(answer);
+            skill.setProficiency(Proficiency.valueOf(answer.toUpperCase()).getText());
 
             skillList.add(skill);
             skillsCounter++;
