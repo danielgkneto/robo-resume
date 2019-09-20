@@ -1,5 +1,6 @@
 package com.danielgkneto.mcjavabc;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,15 +8,15 @@ import java.util.List;
 public class Work {
     private String company;
     private String jobTitle;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private List<String> jobDescriptions;
 
     public Work() {
         this.jobDescriptions = new ArrayList<>();
     }
 
-    public Work(String company, String jobTitle, Date startDate, Date endDate, List<String> jobDescriptions) {
+    public Work(String company, String jobTitle, LocalDate startDate, LocalDate endDate, List<String> jobDescriptions) {
         this();
         this.setCompany(company);
         this.setJobTitle(jobTitle);
@@ -40,20 +41,25 @@ public class Work {
         this.jobTitle = jobTitle;
     }
 
-    public Date getStartDate() {
-        return (Date) this.startDate.clone();
+    public LocalDate getStartDate()
+    {
+        LocalDate date = LocalDate.from(this.startDate);
+        return date;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = (Date) startDate.clone();
+    public void setStartDate(LocalDate startDate) {
+        LocalDate date = LocalDate.from(startDate);
+        this.startDate = date;
     }
 
-    public Date getEndDate() {
-        return (Date) this.endDate.clone();
+    public LocalDate getEndDate() {
+        LocalDate date = LocalDate.from(this.endDate);
+        return date;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = (Date) endDate.clone();
+    public void setEndDate(LocalDate endDate) {
+        LocalDate date = LocalDate.from(endDate);
+        this.endDate = date;
     }
 
     public List<String> getJobDescriptions() {
